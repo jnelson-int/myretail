@@ -4,3 +4,6 @@ spring:
       properties: 
         path: 
           home: ~/Dev/apps/myretail/data
+red-sky: 
+  client-key: candidate
+  base-url: https://redsky.target.com
