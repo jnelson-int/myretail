@@ -14,11 +14,11 @@ import lombok.experimental.Accessors;
 public class ProductPriceDTO {
   private BigDecimal value;
   @JsonProperty("currency_code")
-  private String currency = "USD";
-  
+  private String     currency = "USD";
+
   /*
-   * dev note- setting currency code to default to USD here
-   * <p>
-   * in the real world, we might consider part of this service doing currency conversions based on desired currency requested by client
+   * dev note- setting currency code to default to USD here <p> in the real world,
+   * we might consider part of this service doing currency conversions based on
+   * desired currency requested by client
    */
 }

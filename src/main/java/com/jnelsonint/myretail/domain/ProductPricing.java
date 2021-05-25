@@ -16,6 +16,6 @@ import lombok.experimental.Accessors;
 public class ProductPricing {
 
   @Id
-  private Integer productId;
-  private BigDecimal  price;
+  private Integer    productId;
+  private BigDecimal price;
 }

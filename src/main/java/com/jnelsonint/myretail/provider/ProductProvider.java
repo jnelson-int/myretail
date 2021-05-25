@@ -58,8 +58,7 @@ public class ProductProvider {
       return new ProductDTO()
           .setId(Integer.parseInt(nameInfo.getProduct().getItem().getTcin()))
           .setName(nameInfo.getProduct().getItem().getProductDescription().getTitle())
-          .setCurrentPrice(new ProductPriceDTO().setValue(pricing.getPrice())
-          );
+          .setCurrentPrice(new ProductPriceDTO().setValue(pricing.getPrice()));
     }
 
   }

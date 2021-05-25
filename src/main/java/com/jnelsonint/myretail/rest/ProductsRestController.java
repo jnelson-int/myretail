@@ -23,7 +23,7 @@ public class ProductsRestController {
   public Mono<ProductDTO> getProductById(@PathVariable Integer id) {
     return provider.getById(id);
   }
-  
+
   @PutMapping(value = "/products/{id}", consumes = "application/json")
   public Mono<ProductDTO> updatePricing(@PathVariable Integer id, @RequestBody ProductUpdateDTO update) {
     return provider.updatePricing(id, update.getUpdatedPrice().getValue());
