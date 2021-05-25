@@ -13,5 +13,5 @@ import lombok.Setter;
 public class RedSkyProps {
 
   private String clientKey;
-  
+
 }

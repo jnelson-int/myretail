@@ -3,14 +3,18 @@ package com.jnelsonint.myretail.service;
 import org.springframework.stereotype.Service;
 
 import com.jnelsonint.myretail.domain.ProductPricing;
+import com.jnelsonint.myretail.repository.ProductPricingRepository;
 
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class ProductPricingService {
 
+  private final ProductPricingRepository repo;
+  
   public Mono<ProductPricing> getById(Integer id) {
-    // TODO
-    return Mono.empty();
+    return repo.findById(id);
   }
 }

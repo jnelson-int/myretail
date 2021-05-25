@@ -11,13 +11,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootApplication
 public class MyRetailApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyRetailApplication.class, args);
-	}
-	
-	@Bean
-	public ObjectMapper defaultObjectMapper() {
-	  return new ObjectMapper();
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(MyRetailApplication.class, args);
+  }
+
+  @Bean
+  public ObjectMapper defaultObjectMapper() {
+    return new ObjectMapper();
+  }
 
 }

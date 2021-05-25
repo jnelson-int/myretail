@@ -14,16 +14,16 @@ import lombok.experimental.Accessors;
 public class ProductDTO {
 
   private Integer id;
-  private String name;
+  private String  name;
   @JsonProperty("current_price")
-  private Price currentPrice;
-  
+  private Price   currentPrice;
+
   @Getter
   @Setter
   @Accessors(chain = true)
   public static class Price {
     private BigDecimal value;
     @JsonProperty("currency_code")
-    private String currency;
+    private String     currency;
   }
 }

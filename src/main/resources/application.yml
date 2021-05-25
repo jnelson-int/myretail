@@ -1,9 +1,10 @@
-spring: 
+myretail: 
   data: 
-    elasticsearch: 
-      properties: 
-        path: 
-          home: ~/Dev/apps/myretail/data
+    database-name: myretail-local
 red-sky: 
   client-key: candidate
   base-url: https://redsky.target.com
+spring: 
+  data: 
+    mongodb: 
+      port: 0
