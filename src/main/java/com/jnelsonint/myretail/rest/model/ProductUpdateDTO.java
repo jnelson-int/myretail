@@ -9,11 +9,8 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ProductDTO {
+public class ProductUpdateDTO {
 
-  private Integer         id;
-  private String          name;
   @JsonProperty("current_price")
-  private ProductPriceDTO currentPrice;
-
+  private ProductPriceDTO updatedPrice;
 }

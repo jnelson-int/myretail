@@ -14,6 +14,6 @@ import com.jnelsonint.myretail.ext.model.RedSkyProductInfoDTO;
 public interface RedSkyFeignClient {
 
   @GetMapping(value = "/v3/pdp/tcin/{tcin}", consumes = "application/json")
-  RedSkyProductInfoDTO getByTcinV3(@PathVariable("tcin") String productId,
+  RedSkyProductInfoDTO getPdpByTcinV3(@PathVariable("tcin") String productId,
       @RequestParam("excludes") List<String> excludes);
 }

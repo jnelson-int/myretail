@@ -17,8 +17,10 @@ public class RedSkyFeignClientConfig {
     return template -> template.query(CLIENT_KEY_PARAM_NAME, props.getClientKey());
   }
 
-  // dev note - this is a workaround needed due to known issue with this combination of versions
-  // this workaround will cause performance issues, but is a viable fix for this case study
+  // dev note - this is a workaround needed due to known issue with this
+  // combination of versions
+  // this workaround will cause performance issues, but is a viable fix for this
+  // case study
   @Bean
   public Decoder feignDecoder() {
     ObjectFactory<HttpMessageConverters> messageConverters = () -> {
