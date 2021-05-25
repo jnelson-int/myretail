@@ -1,10 +1,7 @@
-myretail: 
-  data: 
-    database-name: myretail-local
 red-sky: 
   client-key: candidate
   base-url: https://redsky.target.com
 spring: 
   data: 
     mongodb: 
-      port: 0
+      port: 27017

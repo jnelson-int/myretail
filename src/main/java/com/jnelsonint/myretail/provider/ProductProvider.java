@@ -1,6 +1,8 @@
 package com.jnelsonint.myretail.provider;
 
+import java.math.BigDecimal;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +12,7 @@ import com.jnelsonint.myretail.domain.ProductPricing;
 import com.jnelsonint.myretail.ext.feign.RedSkyFeignClient;
 import com.jnelsonint.myretail.ext.model.RedSkyProductInfoDTO;
 import com.jnelsonint.myretail.rest.model.ProductDTO;
-import com.jnelsonint.myretail.rest.model.ProductDTO.Price;
+import com.jnelsonint.myretail.rest.model.ProductPriceDTO;
 import com.jnelsonint.myretail.service.ProductPricingService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,12 +26,22 @@ public class ProductProvider {
   private final ProductPricingService productPricingService;
   private final RedSkyFeignClient     client;
 
+  public Mono<ProductDTO> updatePricing(Integer id, BigDecimal price) {
+    return get(id, productPricingService.getById(id)
+        .defaultIfEmpty(new ProductPricing().setProductId(id))
+        .map(pp -> pp.setPrice(price))
+        .map(productPricingService::save)
+        .flatMap(Function.identity()));
+  }
+
   public Mono<ProductDTO> getById(Integer id) {
+    return get(id, productPricingService.getById(id));
+  }
 
+  Mono<ProductDTO> get(Integer id, Mono<ProductPricing> pricing) {
     Mono<RedSkyProductInfoDTO> productNameInfo = getProductNameFromRedSky(id).subscribeOn(Schedulers.boundedElastic());
-    Mono<ProductPricing> pricing = productPricingService.getById(id).subscribeOn(Schedulers.boundedElastic());
-
-    return Mono.zip(productNameInfo, pricing, new ProductDTOFunc());
+    return Mono.zip(productNameInfo.subscribeOn(Schedulers.boundedElastic()),
+        pricing.subscribeOn(Schedulers.boundedElastic()), new ProductDTOFunc());
   }
 
   Mono<RedSkyProductInfoDTO> getProductNameFromRedSky(Integer id) {
@@ -46,8 +58,7 @@ public class ProductProvider {
       return new ProductDTO()
           .setId(Integer.parseInt(nameInfo.getProduct().getItem().getTcin()))
           .setName(nameInfo.getProduct().getItem().getProductDescription().getTitle())
-          .setCurrentPrice(new Price().setValue(pricing.getPrice())
-          // TODO set currency
+          .setCurrentPrice(new ProductPriceDTO().setValue(pricing.getPrice())
           );
     }
 

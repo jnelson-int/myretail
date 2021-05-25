@@ -13,8 +13,12 @@ import reactor.core.publisher.Mono;
 public class ProductPricingService {
 
   private final ProductPricingRepository repo;
-  
+
   public Mono<ProductPricing> getById(Integer id) {
     return repo.findById(id);
+  }
+
+  public Mono<ProductPricing> save(ProductPricing entity) {
+    return repo.save(entity);
   }
 }
