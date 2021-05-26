@@ -28,7 +28,6 @@ public class ProductProvider {
 
   public Mono<ProductDTO> updatePricing(Integer id, BigDecimal price) {
     return get(id, productPricingService.getById(id)
-        .defaultIfEmpty(new ProductPricing().setProductId(id))
         .map(pp -> pp.setPrice(price))
         .map(productPricingService::save)
         .flatMap(Function.identity()));
