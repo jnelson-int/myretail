@@ -40,7 +40,10 @@ public class ProductProvider {
 
   Mono<ProductDTO> get(Integer id, Mono<ProductPricing> pricing) {
     Mono<RedSkyProductInfoDTO> productNameInfo = getProductNameFromRedSky(id).subscribeOn(Schedulers.boundedElastic());
-    return Mono.zip(productNameInfo.subscribeOn(Schedulers.boundedElastic()),
+    // caveat to using mono and zip here is that unless both monos emit values onNext, we will not get a ProductDTO
+    // so it depends what the business requirements are. if we want to only return data when everything is present, this is great
+    return Mono.zip(
+        productNameInfo.subscribeOn(Schedulers.boundedElastic()),
         pricing.subscribeOn(Schedulers.boundedElastic()), new ProductDTOFunc());
   }
 
